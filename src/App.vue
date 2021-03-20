@@ -1,7 +1,9 @@
 <template>
   <div class="container mx-auto mt-4">
     <h1 class="is-size-3 has-text-centered p-2 has-text-weight-bold">
-      任务管理应用
+      <a href="https://codytang.cn/2021/03/20/vue3-ts-list/">
+        Vue3 + TypeScript + Vuex4 初尝试
+      </a>
     </h1>
     <div v-if="loading">
       <h3 class="has-text-centered mt-4">Loading...</h3>
