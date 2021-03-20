@@ -10,8 +10,10 @@ after_success:
   - cd dist
   - git init
   - git add .
+  - git config user.name cody1991
+  - git config user.email "476490767@qq.com"
   - git commit -m "自动更新pages"
-  - git push -f git@github.com:cody1991/vue3-typescript.git master:gh-pages
+  - git push --force --quiet "https://${GITHUB_TOKEN}@github.com/cody1991/vue3-typescript" master:master
 
 deploy:
   provider: pages
