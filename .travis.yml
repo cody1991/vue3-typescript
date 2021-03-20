@@ -2,12 +2,9 @@ language: node_js
 node_js:
   - 'node'
 
-before_install:
-  - echo "npm config set registry https://registry.npmjs.org/"
-
 cache: npm
 
-script: npm build
+script: npm run build
 
 deploy:
   provider: pages
