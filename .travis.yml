@@ -3,11 +3,11 @@ node_js:
   - 'node'
 
 before_install:
-  - echo "//registry.npmjs.org/" > .npmrc
+  - echo "npm config set registry https://registry.npmjs.org/"
 
 cache: npm
 
-script: npm run build
+script: npm build
 
 deploy:
   provider: pages
