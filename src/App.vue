@@ -1,27 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="container mx-auto mt-4">
+    <h1 class="is-size-3 has-text-centered p-2 has-text-weight-bold">
+      任务管理应用
+    </h1>
+    <div v-if="loading">
+      <h3 class="has-text-centered mt-4">Loading...</h3>
+    </div>
+    <div v-else>
+      <p class="has-text-centered mt-2">
+        {{ completedCount }} of {{ totalTaskCount }} completed.
+      </p>
+      <TaskList />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent, computed, onMounted } from 'vue';
+import { useStore } from './store';
+import { ActionTypes } from './store/actions';
+import TaskList from './components/TaskList.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
-  }
+    TaskList,
+  },
+  setup() {
+    const store = useStore();
+    const loading = computed(() => store.state.loading);
+    const completedCount = computed(() => store.getters.completedTaskCount);
+    const totalTaskCount = computed(() => store.getters.totalTaskCount);
+
+    onMounted(() => store.dispatch(ActionTypes.GetTaskItems));
+
+    return {
+      loading,
+      completedCount,
+      totalTaskCount,
+    };
+  },
 });
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import '~bulma/css/bulma.css';
 </style>
